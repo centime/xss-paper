@@ -1,4 +1,4 @@
-XSS : severity of the most underlooked web vulnerability in the wild
+XSS : severity of the most overlooked web vulnerability in the wild
 ====================================================================
 
 Abstract
@@ -24,12 +24,12 @@ Expose the ins and outs of XSS vulnerabilites, and sensibilize about how serious
 
 What will we do ?
 -----------------
-explain how it works, why it works, and what it can do
-demonstrate their potential with a realistic scenario demonstration 
-   create a target using an open source project and adding a vulnerability of our own
-   craft a sophisticated payload to execute valuable operations on behalf of the user
-   set up a good vector for our payload to the targeted user
-   profit
+    explain how it works, why it works, and what it can do
+    demonstrate their potential with a realistic scenario demonstration 
+       create a target using an open source project and adding a vulnerability of our own
+       craft a sophisticated payload to execute valuable operations on behalf of the user
+       set up a good vector for our payload to the targeted user
+       profit
 
 Tools :
 -------
@@ -42,7 +42,7 @@ Detailled plan :
     Introduction
         injection
         client-side
-        overlooked
+        underlooked
             
     I. How to trigger an xss
         examples
@@ -113,5 +113,4 @@ papers :
     http://info.whitehatsec.com/rs/whitehatsecurity/images/statsreport2014-20140410.pdfhttp://info.whitehatsec.com/rs/whitehatsecurity/images/statsreport2014-20140410.pdf
 
 
-Annette Winge
-Vincent Delaunay
+Annette Winge, Vincent Delaunay
