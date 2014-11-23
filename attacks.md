@@ -68,7 +68,7 @@ Step 10 : profit !  [[Images ?]]
 
 III. Read a user's private conversations.
 -----------------------------------------
-Of course, like any exploit, this one is dirty as heck. But hey, it kind of works.
+Of course, like any exploit, this one is dirty as heck[4]. But hey, it kind of works.
 
     base64 -w0 read-private.js > read-private.b64
 
@@ -133,3 +133,4 @@ Refs
         and didn't investigate any further...
     [2] http://portswigger.net/burp/
     [3] https://github.com/mandatoryprogrammer/xssless
+    [4] https://github.com/centime/xss-paper/blob/master/payloads/read-private.js

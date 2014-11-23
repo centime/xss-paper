@@ -3,7 +3,7 @@ XSS : severity of the most overlooked web vulnerability in the wild
 
 Abstract
 --------
-Cross Site Scripting (XSS) vulnerabilities is the most common web vulnerability. Because of the explosion of web apps in the past few years, but also because their severity is often underestimated.
+Cross Site Scripting (XSS) is the most common web vulnerability. Because of the explosion of web apps in the past few years, but also because their severity is often underestimated.
 Here we want to explain in details this class of vulnerabilities, how it intricates with other technologies in the complex context of the web, and its reach.
 
 Headlines
@@ -98,6 +98,9 @@ Detailled plan :
 
 papers :
 --------
+    http://escape.alf.nu
+    http://www.google.com/about/appsecurity/learning/xss/
+
     https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-stock.pdf
     https://www.sba-research.org/wp-content/uploads/publications/Wurzinger_SWAPMitigatingXSS_2009.pdf
     http://www.adambarth.com/papers/2009/barth-caballero-song.pdf
