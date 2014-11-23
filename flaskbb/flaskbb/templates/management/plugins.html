@@ -1,0 +1,52 @@
+{% set page_title = "Plugins" %}
+
+{% extends theme("management/management_layout.html") %}
+{% block management_content %}
+{% from theme('macros.html') import render_pagination %}
+
+<legend>Manage Plugins</legend>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Plugin</th>
+            <th>Information</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plugin in plugins %}
+        <tr>
+          <td>
+            {% if plugin.website %}
+              <a href="{{ plugin.website }}">{{ plugin.name }}</a>
+            {% else %}
+              {{ plugin.name }}
+            {% endif %}
+            </td>
+            <td>
+                Version: <i>{{ plugin.version }}</i> <br />
+                {{ plugin.description }} <br />
+                by  <i>{{ plugin.author }}</i> 
+            </td>
+            <td>
+                {% if not plugin.enabled %}
+                <a href="{{ url_for('management.enable_plugin', plugin=plugin.identifier) }}">Enable</a>
+                {% else %}
+                <a href="{{ url_for('management.disable_plugin', plugin=plugin.identifier) }}">Disable</a>
+                {% endif %}
+
+                {% set uninstallable = plugin.uninstallable %}
+                {% if plugin.installable and not uninstallable %}
+                <br />
+                <a href="{{ url_for('management.install_plugin', plugin=plugin.identifier) }}">Install</a>
+                {% endif %}
+                {% if uninstallable %}
+                <a href="{{ url_for('management.uninstall_plugin', plugin=plugin.identifier) }}">Uninstall</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

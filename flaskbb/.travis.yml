@@ -1,0 +1,13 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+# command to install dependencies
+install:
+  - "pip install -r requirements.txt"
+  - "pip install coveralls"
+# command to run tests
+script:
+  - py.test --cov=flaskbb --cov-report=term-missing tests
+after_success:
+  - coveralls
