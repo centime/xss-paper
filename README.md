@@ -1,5 +1,6 @@
 XSS : severity of the most overlooked web vulnerability in the wild
 ====================================================================
+(all code and files used in examples are at https://github.com/centime/xss-paper)
 
 Abstract
 --------
