@@ -1,0 +1,19 @@
+Introduction
+============
+
+    "Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted web sites." OWASP[0]
+
+An injection attack is when, through an improperly sanitized input, a user can manage to evaluate all or part of this input.
+
+The main characteristic of XSS is that it executes scripts that run on the client side. This is usually javascript, and even if XSS per se restricted to it, in practice the exceptions are extremly rare.
+
+The client side is everything that runs in the scope of the browser. It is an environement have considerably evolved in the last few years, both in terms of capabilities and usage. With the multiplication of cloud-based bureautic suites, files hosting services, web apps... We could say that the Web is today's desktop. Which would make the browser it's operating system ?
+
+Anyway, all of this makes what is happening in the browser of primary importance : who controls it controls today most of the computer usage of the user. This is why XSS, or preventing XSS, is so important.
+
+Still, they are often regarded as a "second class" vulnerability, even by web developpers, who should know better. It probably comes from not grasping the scope of what exploiting a XSS can do. Granted, examples and demonstrations are often not impressive, when it resumes to popping an alert window in our own browser...
+
+The ultimate goal of this writing is to prove it wrong.
+
+
+[0] https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)

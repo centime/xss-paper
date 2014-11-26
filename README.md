@@ -43,6 +43,7 @@ Detailled plan :
     Introduction
         injection
         client-side
+        web : the new desktop
         underlooked
             
     I. How to trigger an xss

