@@ -9,7 +9,7 @@ First we will setup a vulnerable application, then propose 3 different attacks :
         
 I. Setup the vulnerable application : a forum.
 ----------------------------------------------
-In an attempt to be as realistic as possible, I decided to start with a real full-fledged application. I choose flaskbb[0], a forum developped in python using flask.
+In an attempt to be as realistic as possible, I decided to start with a real full-fledged application. I choose flaskbb[0], a forum developed in python using flask.
 
 First step is to add our extra XSS "feature". I kept it simple by adding a new route to the project, where you can provide base64-encoded javascript to be executed. For example, executing "alert(1)" will look like this :
 
