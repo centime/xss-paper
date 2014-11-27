@@ -51,25 +51,11 @@ Detailled plan :
         Local : so many ways for a target to be vulnerable.
 
 
-    III. Mitigations and best practices
-
-        http
-            HttpOnly
-            CSP
-        dev
-            sanitize inputs : html special chars
-            frameworks
-                angularJS fail
-        ecosystem (leads)
-            reverse proxy (cf paper)
-            monitoring (cf paper)
-        browser
-            policies
-                CORS
-                XSS-filters
-            extensions
-                noscript
-                ~adblock
+    III. Mitigations
+        HTTP
+        Developer
+        Server admin
+        Browser
 
     IV. From trigger to exploit : attack scenarios
         impact
