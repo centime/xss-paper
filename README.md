@@ -9,15 +9,15 @@ Here we want to explain in details this class of vulnerabilities, how it intrica
 
 Headlines
 ---------
-    Abstract
-    [Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)
-    I. What is a XSS attack ?
-    [II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)
-    [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
-    [IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
-    Conclusion 
-    Appendix
-    references
+Abstract
+[Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)  
+I. What is a XSS attack ?  
+[II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)  
+[III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)  
+[IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)  
+Conclusion   
+Appendix  
+references  
 
 The Goal
 --------
@@ -35,41 +35,45 @@ What will we do ?
 Detailled plan :
 ----------------
 
-    
-    [Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)
 
-    I. What is a XSS attack ?
-        How to trigger ?
-        Reflected, Stored, DOM-based.
-        Vectors
+[Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)  
 
-    [II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)
-        Global : so many potential targets.
-        Local : so many ways for a target to be vulnerable.
+I. What is a XSS attack ?
+
+    How to trigger ?
+    Reflected, Stored, DOM-based.
+    Vectors
+
+[II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)
+
+    Global : so many potential targets.
+    Local : so many ways for a target to be vulnerable.
 
 
-    [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
-        HTTP
-        Developer
-        Server admin
-        Browser
+[III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
 
-    [IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
-        impact
-            any action on behalf of the user
-            sometimes the user is the admin
-            cookies
-            rich environment, lots of techs -> huge capabilities
-                +websockets, +WebRTC, ...
+    HTTP
+    Developer
+    Server admin
+    Browser
 
-        exploitation tool kits
-            Beef
-            xssless
-            audit frameworks
-                genetic algorithms (cf paper)
+[IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
 
-        attack scenario
-            targeted
+    impact
+        any action on behalf of the user
+        sometimes the user is the admin
+        cookies
+        rich environment, lots of techs -> huge capabilities
+            +websockets, +WebRTC, ...
+
+    exploitation tool kits
+        Beef
+        xssless
+        audit frameworks
+            genetic algorithms (cf paper)
+
+    attack scenario
+        targeted
 
 Tools :
 -------
