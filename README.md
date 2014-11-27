@@ -10,11 +10,11 @@ Here we want to explain in details this class of vulnerabilities, how it intrica
 Headlines
 ---------
     Abstract
-    Inctroduction 
-    How to trigger an xss
-    The web techno stack : complex and subtle, prone to vulnerabilities
-    From trigger to exploit : attack scenarios
-    Mitigations and best practices
+    Introduction
+    I. What is a XSS attack ?
+    II. The attack surface.
+    III. From trigger to exploit : attack scenarios
+    IV. Mitigations and best practices
     Conclusion 
     Appendix
     references
@@ -41,23 +41,23 @@ Tools :
 Detailled plan :
 ----------------
 
-    ###Introduction
+    Introduction
         injection
         client-side
         web : the new desktop
         underlooked
             
-    ###I. What is a XSS attack ?
+    I. What is a XSS attack ?
         How to trigger ?
         Reflected, Stored, DOM-based.
         Vectors
 
-    ###II. The attack surface.
+    II. The attack surface.
         Global : so many potential targets.
         Local : so many ways for a target to be vulnerable.
 
 
-    ###III. From trigger to exploit : attack scenarios
+    III. From trigger to exploit : attack scenarios
         impact
             any action on behalf of the user
             sometimes the user is the admin
@@ -74,7 +74,7 @@ Detailled plan :
         attack scenario
             targeted
 
-    ###IV. Mitigations and best practices
+    IV. Mitigations and best practices
 
         environment
             cookies
