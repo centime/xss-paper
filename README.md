@@ -40,39 +40,30 @@ Tools :
 
 Detailled plan :
 ----------------
-    Introduction
+
+    ###Introduction
         injection
         client-side
         web : the new desktop
         underlooked
             
-    I. How to trigger an xss
-        examples
+    ###I. What is a XSS attack ?
+        How to trigger ?
+        Reflected, Stored, DOM-based.
+        Vectors
 
-    II. The web techno stack : complex and subtle, prone to vulnerabilities
-        attack surface
-            global
-                more and more client-side, web apps
-            local
-                multiple parsers
-                    so many ways to execute js from html
-                    more layers -> more complex semantic rules.
-                js
-                    so permissive !
-                flash
+    ###II. The attack surface.
+        Global : so many potential targets.
+        Local : so many ways for a target to be vulnerable.
 
-        attack vectors
-            stored
-                rest  api
-            reflected
-                mail
-                corrupted content
 
-    III. From trigger to exploit : attack scenarios
+    ###III. From trigger to exploit : attack scenarios
         impact
             any action on behalf of the user
             sometimes the user is the admin
             cookies
+            rich environment, lots of techs -> huge capabilities
+                +websockets, +WebRTC, ...
 
         exploitation tool kits
             Beef
@@ -83,20 +74,24 @@ Detailled plan :
         attack scenario
             targeted
 
-    IV. Mitigations and best practices
-        counter measures
-            dev
-                sanitize inputs : html special chars
-                frameworks
-                    angularJS fail
-            ecosystem (leads)
-                reverse proxy (cf paper)
-                monitoring (cf paper)
-            user
-                browser policies
-                browser extensions
-                    noscript
-                    ~adblock
+    ###IV. Mitigations and best practices
+
+        environment
+            cookies
+            csrf-tokens
+            CORS
+        dev
+            sanitize inputs : html special chars
+            frameworks
+                angularJS fail
+        ecosystem (leads)
+            reverse proxy (cf paper)
+            monitoring (cf paper)
+        user
+            browser policies
+            browser extensions
+                noscript
+                ~adblock
 
 papers :
 --------
