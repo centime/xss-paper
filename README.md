@@ -9,6 +9,8 @@ Here we want to explain in details this class of vulnerabilities, how it intrica
 
 ![How you should not react when someone discloses a XSS in your project, if you understand it](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/wrong.jpg)
 
+![How you should DEFINITIVELY not react when someone discloses a XSS in your project !](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/so-wrong.jpg)
+
 Headlines
 ---------
 Abstract  
