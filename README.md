@@ -7,6 +7,8 @@ Abstract
 Cross Site Scripting (XSS) is the most common web vulnerability. Because of the explosion of web apps in the past few years, but also because their severity is often underestimated.
 Here we want to explain in details this class of vulnerabilities, how it intricates with other technologies in the complex context of the web, and its reach.
 
+Because as you will see, XSS attack can have a really huge impact on users. And as you can see, sometimes developers and editors don't fully understand it...
+
 ![How you should not react when someone discloses a XSS in your project, if you understand it](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/wrong.jpg)
 
 ![How you should DEFINITIVELY not react when someone discloses a XSS in your project !](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/so-wrong.jpg)
