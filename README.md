@@ -13,8 +13,8 @@ Headlines
     Introduction
     I. What is a XSS attack ?
     II. The attack surface.
-    III. From trigger to exploit : attack scenarios
-    IV. Mitigations and best practices
+    III. Mitigations and best practices
+    IV. From trigger to exploit : attack scenarios
     Conclusion 
     Appendix
     references
@@ -31,12 +31,6 @@ What will we do ?
        craft a sophisticated payload to execute valuable operations on behalf of the user
        set up a good vector for our payload to the targeted user
        profit
-
-Tools :
--------
-    burpsuite
-    xssless
-    Beef
 
 Detailled plan :
 ----------------
@@ -57,7 +51,27 @@ Detailled plan :
         Local : so many ways for a target to be vulnerable.
 
 
-    III. From trigger to exploit : attack scenarios
+    III. Mitigations and best practices
+
+        http
+            HttpOnly
+            CSP
+        dev
+            sanitize inputs : html special chars
+            frameworks
+                angularJS fail
+        ecosystem (leads)
+            reverse proxy (cf paper)
+            monitoring (cf paper)
+        browser
+            policies
+                CORS
+                XSS-filters
+            extensions
+                noscript
+                ~adblock
+
+    IV. From trigger to exploit : attack scenarios
         impact
             any action on behalf of the user
             sometimes the user is the admin
@@ -74,24 +88,11 @@ Detailled plan :
         attack scenario
             targeted
 
-    IV. Mitigations and best practices
-
-        environment
-            cookies
-            csrf-tokens
-            CORS
-        dev
-            sanitize inputs : html special chars
-            frameworks
-                angularJS fail
-        ecosystem (leads)
-            reverse proxy (cf paper)
-            monitoring (cf paper)
-        user
-            browser policies
-            browser extensions
-                noscript
-                ~adblock
+Tools :
+-------
+    burpsuite
+    xssless
+    Beef
 
 papers :
 --------
