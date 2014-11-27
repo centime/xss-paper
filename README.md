@@ -10,11 +10,11 @@ Here we want to explain in details this class of vulnerabilities, how it intrica
 Headlines
 ---------
     Abstract
-    Introduction
+    [Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)
     I. What is a XSS attack ?
-    II. The attack surface.
-    III. Mitigations and best practices
-    IV. From trigger to exploit : attack scenarios
+    [II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)
+    [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
+    [IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
     Conclusion 
     Appendix
     references
@@ -35,29 +35,26 @@ What will we do ?
 Detailled plan :
 ----------------
 
-    Introduction
-        injection
-        client-side
-        web : the new desktop
-        underlooked
-            
+    
+    [Introduction](https://github.com/centime/xss-paper/blob/master/0.Introduction.md)
+
     I. What is a XSS attack ?
         How to trigger ?
         Reflected, Stored, DOM-based.
         Vectors
 
-    II. The attack surface.
+    [II. The attack surface.](https://github.com/centime/xss-paper/blob/master/1.Attack_surface.md)
         Global : so many potential targets.
         Local : so many ways for a target to be vulnerable.
 
 
-    III. Mitigations
+    [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
         HTTP
         Developer
         Server admin
         Browser
 
-    IV. From trigger to exploit : attack scenarios
+    [IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
         impact
             any action on behalf of the user
             sometimes the user is the admin
