@@ -7,11 +7,13 @@ Abstract
 Cross Site Scripting (XSS) is the most common web vulnerability. Because of the explosion of web apps in the past few years, but also because their severity is often underestimated.
 Here we want to explain in details this class of vulnerabilities, how it intricates with other technologies in the complex context of the web, and its reach.
 
-Because as you will see, XSS attack can have a really huge impact on users. And as you can see, sometimes developers and editors don't fully understand it...
+Because as you will see later, XSS attack can have a devastating impact on users. And as you can see below, sometimes developers and editors don't fully understand it...
 
 ![How you should not react when someone discloses a XSS in your project, if you understand it](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/wrong.jpg)
 
 ![How you should DEFINITIVELY not react when someone discloses a XSS in your project !](https://raw.githubusercontent.com/centime/xss-paper/master/screenshots/so-wrong.jpg)
+
+After reading this paper, you should be able to tell what was wrong in each of their reactions !
 
 Headlines
 ---------
@@ -20,9 +22,9 @@ Abstract
 I. What is a XSS attack ?  
 [II. The attack surface.](https://github.com/centime/xss-paper/blob/master/2.Attack_surface.md)  
 [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)  
-[IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)  
-Conclusion   
-Appendix  
+[IV. Exploitations](https://github.com/centime/xss-paper/blob/master/4.Exploitations.md)  
+[Conclusion](https://github.com/centime/xss-paper/blob/master/5.Conclusion.md)  
+[Appendix](https://github.com/centime/xss-paper/blob/master/6.Appendix.md)  
 references  
 
 The Goal
@@ -34,7 +36,7 @@ What will we do ?
     explain how it works, why it works, and what it can do
     demonstrate their potential with a realistic scenario demonstration 
        create a target using an open source project and adding a vulnerability of our own
-       craft a sophisticated payload to execute valuable operations on behalf of the user
+       craft sophisticated payloads to execute valuable operations on behalf of the user
        set up a good vector for our payload to the targeted user
        profit
 
@@ -58,36 +60,29 @@ I. What is a XSS attack ?
 
 [III. Mitigations](https://github.com/centime/xss-paper/blob/master/3.Mitigations.md)
 
-    HTTP
+    HTTP revisions
     Developer
     Server admin
     Browser
 
-[IV. Attack scenarios](https://github.com/centime/xss-paper/blob/master/attacks.md)
+[IV. Exploitations](https://github.com/centime/xss-paper/blob/master/4.Exploitations.md)
+    
+    What is idea behind exploiting a XSS vulnerability ?
+    Demonstrations
+        A. Setup the vulnerable application : a forum.
+        B. Post a message on behalf of a user.
+        C. Read a user's private conversations.
+        D. Man In the Browser
+            Keylogger
+            Interactive session hijacking
+            More...
+    Summary
 
-    impact
-        any action on behalf of the user
-        sometimes the user is the admin
-        cookies
-        rich environment, lots of techs -> huge capabilities
-            +websockets, +WebRTC, ...
+[Conclusion](https://github.com/centime/xss-paper/blob/master/5.Conclusion.md)
 
-    exploitation tool kits
-        Beef
-        xssless
-        audit frameworks
-            genetic algorithms (cf paper)
+[Appendix](https://github.com/centime/xss-paper/blob/master/6.Appendix.md)
 
-    attack scenario
-        targeted
-
-Tools :
--------
-    burpsuite
-    xssless
-    Beef
-
-papers :
+Papers :
 --------
     http://escape.alf.nu
     http://www.google.com/about/appsecurity/learning/xss/
