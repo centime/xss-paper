@@ -74,6 +74,7 @@ I. What is a XSS attack ?
         C. Read a user's private conversations.
         D. Man In the Browser
             Keylogger
+            Stored passwords recovery
             Interactive session hijacking
             More...
     Summary
