@@ -11,7 +11,7 @@ The steps of our demonstration will be : setting up a vulnerable application, th
 
 You will find here :
 --------------------
-[The appendix](https://github.com/centime/xss-paper/blob/master/appendix.pdf)
+[The appendix](https://github.com/centime/xss-paper/raw/master/appendix.pdf)
 
 [Step by step instructions to reproduce the experiments](https://github.com/centime/xss-paper/blob/master/Exploitations.md)
 
